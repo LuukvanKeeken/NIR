@@ -42,7 +42,13 @@ __all_ir = [
 
 
 def str2NIRNode(type: str) -> NIRNode:
-    assert type in __all_ir
+    if type not in __all_ir:
+        if type == "NIRNode":
+            raise ValueError(
+                "NIRNode is an abstract base class that should not be used in graphs."
+            )
+        else:
+            raise ValueError(f"Unknown NIRNode type: {type}")
 
     return globals()[type]
 
